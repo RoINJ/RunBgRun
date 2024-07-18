@@ -8,14 +8,9 @@ namespace Scripts.Authentication
 {
     public class FirebaseAuthenticationProvider : IAuthenticationProvider
     {
-        private FirebaseAuth _auth;
-        private static FirebaseAuthenticationProvider _instance;
-
-        public static FirebaseAuthenticationProvider Instance => _instance ??= new FirebaseAuthenticationProvider();
-
         public IEnumerator SignIn(string email, string password, Action<User> onSuccess, Action<string> onFailure)
         {
-            var loginTask = _auth.SignInWithEmailAndPasswordAsync(email, password);
+            var loginTask = FirebaseAuth.DefaultInstance.SignInWithEmailAndPasswordAsync(email, password);
 
             yield return new WaitUntil(() => loginTask.IsCompleted);
 
@@ -55,7 +50,7 @@ namespace Scripts.Authentication
 
         public IEnumerator SignUp(string email, string password, string username, Action<User> onSuccess, Action<string> onFailure)
         {
-            var signUpTask = _auth.CreateUserWithEmailAndPasswordAsync(email, password);
+            var signUpTask = FirebaseAuth.DefaultInstance.CreateUserWithEmailAndPasswordAsync(email, password);
 
             yield return new WaitUntil(() => signUpTask.IsCompleted);
 
@@ -116,11 +111,6 @@ namespace Scripts.Authentication
                     onFailure("User is null");
                 }
             }
-        }
-
-        private FirebaseAuthenticationProvider()
-        {
-            _auth = FirebaseAuth.DefaultInstance;
         }
     }
 }
