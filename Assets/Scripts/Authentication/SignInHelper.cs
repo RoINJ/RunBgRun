@@ -2,11 +2,14 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UIElements;
+using Zenject;
 
 namespace Scripts.Authentication
 {
     public class SignInHelper : MonoBehaviour
     {
+        private IAuthenticationProvider _authProvider;
+
         [SerializeField]
         private AuthUIManager _authUIManager;
 
@@ -16,6 +19,12 @@ namespace Scripts.Authentication
         [SerializeField]
         private TextMeshProUGUI _passwordField;
 
+        [Inject]
+        public void Init(IAuthenticationProvider authProvider)
+        {
+            _authProvider = authProvider;
+        }
+
         public void SignIn()
         {
             if (ValidateFields())
@@ -24,7 +33,7 @@ namespace Scripts.Authentication
                 var password = _passwordField.text;
 
                 StartCoroutine(
-                    FirebaseAuthenticationProvider.Instance.SignIn(
+                    _authProvider.SignIn(
                         email, password, OnSignInSuccess, OnAuthFailure));
             }
         }
