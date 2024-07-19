@@ -1,4 +1,4 @@
-namespace Scripts.Runner
+namespace Scripts.Runner.Player
 {
     public enum ECurrentAction
     {

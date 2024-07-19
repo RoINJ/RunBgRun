@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Scripts.Runner
+namespace Scripts.Runner.Player
 {
     public class AnimationsCallback : MonoBehaviour
     {

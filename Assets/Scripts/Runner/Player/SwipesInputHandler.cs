@@ -1,19 +1,17 @@
 using UnityEngine;
 
-namespace Scripts.Runner
+namespace Scripts.Runner.Player
 {
-    public class InputHandler : MonoBehaviour
+    public class SwipesInputHandler : IInputHandler
     {
-        [SerializeField]
         private PlayerMovement _playerMovement;
 
-        private void Update()
+        public SwipesInputHandler(PlayerMovement playerMovement)
         {
-            HandleSwipesInput();
-            HandleKeysInput();
+            _playerMovement = playerMovement;
         }
 
-        private void HandleSwipesInput()
+        public void HandleInput()
         {
             if (Input.touchCount > 0)
             {
@@ -38,29 +36,6 @@ namespace Scripts.Runner
                         }
                     }
                 }
-            }
-        }
-
-        private void HandleKeysInput()
-        {
-            if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
-            {
-                _playerMovement.ChangeLane(-1);
-            }
-
-            if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
-            {
-                _playerMovement.ChangeLane(1);
-            }
-
-            if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
-            {
-                _playerMovement.Jump();
-            }
-
-            if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S))
-            {
-                _playerMovement.Slide();
             }
         }
     }

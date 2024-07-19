@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Scripts.Runner
+namespace Scripts.Runner.Player
 {
     public class PlayerMovement : MonoBehaviour
     {
@@ -21,10 +21,23 @@ namespace Scripts.Runner
 
         private ECurrentAction _currentAction = ECurrentAction.None;
 
+        private IInputHandler _inputHandler;
+
         private void Start()
         {
             _animator = GetComponentInChildren<Animator>();
             _animator.SetTrigger("RunTrigger");
+
+#if (UNITY_ANDROID || UNITY_IOS) && !DEBUG
+            _inputHandler = new SwipesInputHandler(this);
+#else
+            _inputHandler = new KeysInputHandler(this);
+#endif
+        }
+
+        private void Update()
+        {
+            _inputHandler.HandleInput();
         }
 
         private void FixedUpdate()
@@ -50,8 +63,6 @@ namespace Scripts.Runner
 
         public void Slide()
         {
-            Debug.Log("Slide");
-
             if (_currentAction == ECurrentAction.None)
             {
                 _currentAction = ECurrentAction.Slide;
@@ -73,8 +84,6 @@ namespace Scripts.Runner
 
         public void Jump()
         {
-            Debug.Log("Jump");
-
             if (_currentAction == ECurrentAction.None)
             {
                 _currentAction = ECurrentAction.Jump;
