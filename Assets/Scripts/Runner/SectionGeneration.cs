@@ -1,13 +1,17 @@
 using UnityEngine;
+using Zenject;
 
 namespace Scripts.Runner
 {
     public class SectionGeneration : MonoBehaviour
     {
-        private const int SectionLength = 30;
+        private SectionPool _sectionPool;
 
-        [SerializeField]
-        private GameObject _sectionPrefab;
+        [Inject]
+        public void Init(SectionPool sectionPool)
+        {
+            _sectionPool = sectionPool;
+        }
 
         private void OnTriggerEnter(Collider other)
         {
@@ -19,7 +23,8 @@ namespace Scripts.Runner
 
         private void SpawnNewSection()
         {
-            Instantiate(_sectionPrefab, transform.parent.position + Vector3.forward * SectionLength, Quaternion.identity);
+            var section = _sectionPool.Get();
+            section.transform.position = transform.parent.position + Vector3.forward * Constants.SectionLength * Constants.ActiveSectionsCount;
         }
     }
 }

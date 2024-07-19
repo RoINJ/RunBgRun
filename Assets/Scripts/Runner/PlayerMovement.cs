@@ -4,6 +4,8 @@ namespace Scripts.Runner
 {
     public class PlayerMovement : MonoBehaviour
     {
+        public const float LaneDistance = 1f;
+
         [SerializeField]
         private Collider _defaultCollider;
 
@@ -15,9 +17,7 @@ namespace Scripts.Runner
 
         private Animator _animator;
 
-        public float laneDistance = 2.0f; // Distance between lanes
-
-        private int currentLane = 0; // -1 for left, 0 for middle, 1 for right
+        private int _currentLane = 0;
 
         private ECurrentAction _currentAction = ECurrentAction.None;
 
@@ -38,11 +38,11 @@ namespace Scripts.Runner
 
             if (_currentAction == ECurrentAction.None)
             {
-                var targetLane = currentLane + direction;
+                var targetLane = _currentLane + direction;
                 if (targetLane >= -1 && targetLane <= 1)
                 {
-                    currentLane = targetLane;
-                    var deltaPosition = new Vector3(direction * laneDistance, 0, 0);
+                    _currentLane = targetLane;
+                    var deltaPosition = new Vector3(direction * LaneDistance, 0, 0);
                     transform.position += deltaPosition;
                 }
             }
