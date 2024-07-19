@@ -1,5 +1,5 @@
 using Scripts.Authentication;
-using Scripts.Runner;
+using Scripts.Runner.Sections;
 using Zenject;
 
 namespace Scripts.Installers

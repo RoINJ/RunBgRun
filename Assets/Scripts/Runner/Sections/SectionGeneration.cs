@@ -1,7 +1,7 @@
 using UnityEngine;
 using Zenject;
 
-namespace Scripts.Runner
+namespace Scripts.Runner.Sections
 {
     public class SectionGeneration : MonoBehaviour
     {

@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.Pool;
 using Zenject;
 
-namespace Scripts.Runner
+namespace Scripts.Runner.Sections
 {
     public class SectionPool : MonoBehaviour
     {

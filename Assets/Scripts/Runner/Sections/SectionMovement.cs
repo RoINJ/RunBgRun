@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Scripts.Runner
+namespace Scripts.Runner.Sections
 {
     public class SectionMovement : MonoBehaviour
     {
