@@ -8,6 +8,14 @@ namespace Scripts.Authentication
 {
     public class FirebaseAuthenticationProvider : IAuthenticationProvider
     {
+        public User CurrentUser => FirebaseAuth.DefaultInstance.CurrentUser is null
+            ? null :
+            new User
+            {
+                Email = FirebaseAuth.DefaultInstance.CurrentUser.Email,
+                Username = FirebaseAuth.DefaultInstance.CurrentUser.DisplayName
+            };
+
         public IEnumerator SignIn(string email, string password, Action<User> onSuccess, Action<string> onFailure)
         {
             var loginTask = FirebaseAuth.DefaultInstance.SignInWithEmailAndPasswordAsync(email, password);
