@@ -14,7 +14,6 @@ namespace Scripts.Runner
 
         private void DestroySection()
         {
-            Debug.Log("Destroy section");
             Destroy(transform.parent.gameObject);
         }
     }

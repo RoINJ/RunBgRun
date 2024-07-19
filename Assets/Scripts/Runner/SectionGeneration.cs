@@ -19,8 +19,6 @@ namespace Scripts.Runner
 
         private void SpawnNewSection()
         {
-            Debug.Log("Spawn new section");
-            Debug.Log($"Coordinates: {transform.parent.position + Vector3.forward * SectionLength}");
             Instantiate(_sectionPrefab, transform.parent.position + Vector3.forward * SectionLength, Quaternion.identity);
         }
     }
