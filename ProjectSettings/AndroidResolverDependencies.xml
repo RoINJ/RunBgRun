@@ -1,6 +1,9 @@
 <dependencies>
   <packages>
+    <package>androidx.constraintlayout:constraintlayout:2.1.4</package>
+    <package>com.google.android.gms:play-services-ads:23.2.0</package>
     <package>com.google.android.gms:play-services-base:18.5.0</package>
+    <package>com.google.android.ump:user-messaging-platform:2.2.0</package>
     <package>com.google.firebase:firebase-analytics:22.0.2</package>
     <package>com.google.firebase:firebase-app-unity:12.1.0</package>
     <package>com.google.firebase:firebase-auth:23.0.0</package>

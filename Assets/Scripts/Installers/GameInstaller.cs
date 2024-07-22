@@ -15,6 +15,11 @@ namespace Scripts.Installers
                 .AsSingle();
 
             Container
+                .Bind<AdManager>()
+                .FromComponentInHierarchy()
+                .AsSingle();
+
+            Container
                 .Bind<GameManager>()
                 .FromComponentInHierarchy()
                 .AsSingle();

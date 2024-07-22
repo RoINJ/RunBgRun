@@ -41,5 +41,13 @@ namespace Scripts
             _deathMenuPanel.SetActive(true);
             _inGamePanel.SetActive(false);
         }
+
+        public void ShowInGameMenu()
+        {
+            _mainMenuPanel.SetActive(false);
+            _scoreboardPanel.SetActive(false);
+            _deathMenuPanel.SetActive(false);
+            _inGamePanel.SetActive(true);
+        }
     }
 }

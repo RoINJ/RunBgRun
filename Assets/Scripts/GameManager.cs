@@ -5,6 +5,7 @@ using Scripts.Runner.Score;
 using Scripts.Runner.Sections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Zenject;
 
 namespace Scripts
 {
@@ -20,6 +21,14 @@ namespace Scripts
         private RunSpeedManager _runSpeedManager;
 
         private EGameState _gameState;
+
+        private AdManager _adManager;
+
+        [Inject]
+        private void Init(AdManager adManager)
+        {
+            _adManager = adManager;
+        }
 
         private void Start()
         {
@@ -74,6 +83,24 @@ namespace Scripts
         {
             var currentSceneName = SceneManager.GetActiveScene().name;
             SceneManager.LoadScene(currentSceneName);
+        }
+
+        public void ShowAdToRespawn()
+        {
+            _adManager.ShowRewardedAd(Respawn);
+        }
+
+        private void Respawn()
+        {
+            var sections = FindObjectsOfType<SectionMovement>();
+            Array.ForEach(sections, s => s.enabled = true);
+
+            _playerMovement.enabled = true;
+
+            _scoreManager.enabled = true;
+            _runSpeedManager.enabled = true;
+
+            _gameMenuUIManager.ShowInGameMenu();
         }
     }
 }
