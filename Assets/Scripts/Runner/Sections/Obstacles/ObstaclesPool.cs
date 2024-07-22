@@ -2,7 +2,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Pool;
 
-namespace Scripts.Runner.Obstacles
+namespace Scripts.Runner.Sections.Obstacles
 {
     public class ObstaclesPool : MonoBehaviour
     {
@@ -14,6 +14,8 @@ namespace Scripts.Runner.Obstacles
         public int ObstaclesCount => _pools.Length;
         
         public GameObject Get(int index) => _pools[index].Get();
+
+        public void Release(int index, GameObject gameObject) => _pools[index].Release(gameObject);
 
         private void Start()
         {
@@ -30,8 +32,8 @@ namespace Scripts.Runner.Obstacles
 
         private ObjectPool<GameObject> CreatePool(int index) => new(
             createFunc: () => CreateObstacle(index),
-            actionOnGet: section => section.SetActive(true),
-            actionOnRelease: section => section.SetActive(false),
+            actionOnGet: obstacle => obstacle.SetActive(true),
+            actionOnRelease: obstacle => obstacle.SetActive(false),
             actionOnDestroy: Destroy
         );
 

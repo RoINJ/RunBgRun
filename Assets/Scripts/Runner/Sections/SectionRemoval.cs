@@ -1,3 +1,4 @@
+using Scripts.Runner.Sections.Obstacles;
 using UnityEngine;
 using Zenject;
 
@@ -23,8 +24,8 @@ namespace Scripts.Runner.Sections
 
         private void DestroySection()
         {
+            gameObject.GetComponentInParent<ObstaclesSpawner>().ReleaseObstacles();
             _sectionPool.Release(transform.parent.gameObject);
-            //Destroy(transform.parent.gameObject);
         }
     }
 }

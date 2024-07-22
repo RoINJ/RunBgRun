@@ -1,4 +1,5 @@
 using Scripts.Authentication;
+using Scripts.Runner.Sections.Obstacles;
 using Scripts.Runner.Sections;
 using Zenject;
 
@@ -13,7 +14,15 @@ namespace Scripts.Installers
                 .To<FirebaseAuthenticationProvider>()
                 .AsSingle();
 
-            Container.Bind<SectionPool>().FromComponentInHierarchy().AsSingle();
+            Container
+                .Bind<SectionPool>()
+                .FromComponentInHierarchy()
+                .AsSingle();
+
+            Container
+                .Bind<ObstaclesPool>()
+                .FromComponentInHierarchy()
+                .AsSingle();
         }
     }
 }

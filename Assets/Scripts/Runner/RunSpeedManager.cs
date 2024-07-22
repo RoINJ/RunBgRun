@@ -4,8 +4,6 @@ namespace Scripts.Runner
 {
     public class RunSpeedManager : MonoBehaviour
     {
-        private const float Acceleration = 0.0001f;
-
         public float Speed { get; private set; }
 
         public void ResetSpeed()
@@ -20,7 +18,7 @@ namespace Scripts.Runner
 
         private void FixedUpdate()
         {
-            Speed += Acceleration;
+            Speed += Constants.SpeedIncreasingAcceleration;
         }
     }
 }
