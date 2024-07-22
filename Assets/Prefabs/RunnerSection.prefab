@@ -61,7 +61,7 @@ GameObject:
   - component: {fileID: 9134730476719374180}
   - component: {fileID: 4093175857843832393}
   m_Layer: 0
-  m_Name: SectionTrigger
+  m_Name: SectionGenerationTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

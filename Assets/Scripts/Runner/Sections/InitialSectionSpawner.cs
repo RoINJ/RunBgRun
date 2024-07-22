@@ -18,6 +18,7 @@ namespace Scripts.Runner.Sections
             for (var i = 0; i < Constants.ActiveSectionsCount; i++)
             {
                 var section = _sectionPool.Get();
+                section.GetComponent<SectionMovement>().enabled = false;
                 section.transform.position = Vector3.forward * i * Constants.SectionLength;
             }
         }

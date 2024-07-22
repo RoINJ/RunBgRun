@@ -4,33 +4,33 @@ namespace Scripts.Runner.Player
 {
     public class KeysInputHandler : IInputHandler
     {
-        private PlayerMovement _playerMovement;
+        private IMovementHandler _movementHandler;
 
-        public KeysInputHandler(PlayerMovement playerMovement)
+        public KeysInputHandler(IMovementHandler movementHandler)
         {
-            _playerMovement = playerMovement;
+            _movementHandler = movementHandler;
         }
 
         public void HandleInput()
         {
             if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
             {
-                _playerMovement.ChangeLane(-1);
+                _movementHandler.ChangeLane(-1);
             }
 
             if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
             {
-                _playerMovement.ChangeLane(1);
+                _movementHandler.ChangeLane(1);
             }
 
             if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
             {
-                _playerMovement.Jump();
+                _movementHandler.Jump();
             }
 
             if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S))
             {
-                _playerMovement.Slide();
+                _movementHandler.Slide();
             }
         }
     }

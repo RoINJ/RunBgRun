@@ -4,11 +4,11 @@ namespace Scripts.Runner.Player
 {
     public class AnimationsCallback : MonoBehaviour
     {
-        private PlayerMovement _playerMovement;
+        private IMovementHandler _playerMovement;
         
         private void Start()
         {
-            _playerMovement = GetComponentInParent<PlayerMovement>();
+            _playerMovement = GetComponentInParent<IMovementHandler>();
         }
 
         public void StopJumping()

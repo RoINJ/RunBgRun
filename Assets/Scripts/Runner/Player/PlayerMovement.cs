@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Scripts.Runner.Player
 {
-    public class PlayerMovement : MonoBehaviour
+    public class PlayerMovement : MonoBehaviour, IMovementHandler
     {
         public const float LaneDistance = 1f;
 
@@ -25,14 +25,16 @@ namespace Scripts.Runner.Player
 
         private void Start()
         {
-            _animator = GetComponentInChildren<Animator>();
-            _animator.SetTrigger("RunTrigger");
-
 #if (UNITY_ANDROID || UNITY_IOS) && !DEBUG
             _inputHandler = new SwipesInputHandler(this);
 #else
             _inputHandler = new KeysInputHandler(this);
 #endif
+        }
+
+        private void OnEnable()
+        {
+            StartRun();
         }
 
         private void Update()
@@ -43,6 +45,12 @@ namespace Scripts.Runner.Player
         private void FixedUpdate()
         {
             transform.position = new Vector3(transform.position.x, transform.position.y, 0);
+        }
+
+        private void StartRun()
+        {
+            _animator = GetComponentInChildren<Animator>();
+            _animator.SetTrigger("RunTrigger");
         }
 
         public void ChangeLane(int direction)
