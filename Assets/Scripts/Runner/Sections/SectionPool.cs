@@ -18,7 +18,7 @@ namespace Scripts.Runner.Sections
         public GameObject Get() => _sectionPool.Get();
 
         [Inject]
-        public void Init(DiContainer container)
+        private void Init(DiContainer container)
         {
             _container = container;
         }

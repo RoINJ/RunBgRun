@@ -8,14 +8,14 @@ namespace Scripts.Runner.Sections
         private SectionPool _sectionPool;
 
         [Inject]
-        public void Init(SectionPool sectionPool)
+        private void Init(SectionPool sectionPool)
         {
             _sectionPool = sectionPool;
         }
 
         private void Start()
         {
-            for (var i = 0; i < Constants.ActiveSectionsCount; i++)
+            for (var i = 1; i < Constants.ActiveSectionsCount; i++)
             {
                 var section = _sectionPool.Get();
                 section.GetComponent<SectionMovement>().enabled = false;

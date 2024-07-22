@@ -8,7 +8,7 @@ namespace Scripts.Runner.Sections
         private SectionPool _sectionPool;
 
         [Inject]
-        public void Init(SectionPool sectionPool)
+        private void Init(SectionPool sectionPool)
         {
             _sectionPool = sectionPool;
         }

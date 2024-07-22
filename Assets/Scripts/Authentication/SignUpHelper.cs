@@ -24,7 +24,7 @@ namespace Scripts.Authentication
         private TextMeshProUGUI _confirmPasswordField;
 
         [Inject]
-        public void Init(IAuthenticationProvider authProvider)
+        private void Init(IAuthenticationProvider authProvider)
         {
             _authProvider = authProvider;
         }
