@@ -1,5 +1,7 @@
 using System;
+using Scripts.Runner;
 using Scripts.Runner.Player;
+using Scripts.Runner.Score;
 using Scripts.Runner.Sections;
 using TMPro;
 using UnityEngine;
@@ -14,10 +16,16 @@ namespace Scripts
         [SerializeField]
         private PlayerMovement _playerMovement;
 
+        private ScoreManager _scoreManager;
+        private RunSpeedManager _runSpeedManager;
+
         private void Start()
         {
             _playerMovement.enabled = false;
             SetStartGameLabel();
+
+            _scoreManager = GetComponent<ScoreManager>();
+            _runSpeedManager = GetComponent<RunSpeedManager>();
         }
 
         private void SetStartGameLabel()
@@ -45,11 +53,18 @@ namespace Scripts
 
         private void StartGame()
         {
+            var sections = FindObjectsOfType<SectionMovement>();
+            Array.ForEach(sections, s => s.enabled = true);
+
             _startGameLabel.gameObject.SetActive(false);
             _playerMovement.enabled = true;
 
-            var sections = FindObjectsOfType<SectionMovement>();
-            Array.ForEach(sections, s => s.enabled = true);
+            _scoreManager.enabled = true;
+            _runSpeedManager.enabled = true;
+        }
+
+        private void EndGame()
+        {
         }
     }
 }

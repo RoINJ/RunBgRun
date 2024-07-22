@@ -1,25 +1,37 @@
 using TMPro;
 using UnityEngine;
 
-namespace Scripts
+namespace Scripts.Runner.Score
 {
     public class ScoreManager : MonoBehaviour
     {
+        private const float DistanceRewardScore = 10f;
+
         [SerializeField]
         private TextMeshProUGUI _scoreLabel;
 
-        private int _score;
-        public int Score => _score;
+        private RunSpeedManager _runSpeedManager;
 
-        public void SetScore(int score)
-        {
-            _score = score;
-            _scoreLabel.text = _score.ToString();
-        }
+        private float _score;
+        public int Score => (int)_score;
 
         private void Start()
         {
-            SetScore(0);
+            _runSpeedManager = GetComponent<RunSpeedManager>();
+            
+            _score = 0;
+            _scoreLabel.text = _score.ToString();
+        }
+
+        private void Update()
+        {
+            AddScore(Time.deltaTime * _runSpeedManager.Speed * DistanceRewardScore);
+        }
+
+        private void AddScore(float score)
+        {
+            _score += score;
+            _scoreLabel.text = Score.ToString();
         }
     }
 }

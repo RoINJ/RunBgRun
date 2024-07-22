@@ -4,16 +4,16 @@ namespace Scripts.Runner.Sections
 {
     public class SectionMovement : MonoBehaviour
     {
-        private float _movementSpeed;
+        private RunSpeedManager _runSpeedManager;
 
         private void Start()
         {
-            _movementSpeed = Constants.StartMovementSpeed;
+            _runSpeedManager = FindObjectOfType<RunSpeedManager>();
         }
 
         private void FixedUpdate()
         {
-            transform.position += Vector3.back * _movementSpeed;
+            transform.position += Vector3.back * _runSpeedManager.Speed;
         }
     }
 }
