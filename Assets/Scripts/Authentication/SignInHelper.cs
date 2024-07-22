@@ -1,7 +1,5 @@
-using System.Collections;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UIElements;
 using Zenject;
 
 namespace Scripts.Authentication

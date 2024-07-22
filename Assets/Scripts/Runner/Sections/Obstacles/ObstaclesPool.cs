@@ -17,7 +17,7 @@ namespace Scripts.Runner.Sections.Obstacles
 
         public void Release(int index, GameObject gameObject) => _pools[index].Release(gameObject);
 
-        private void Start()
+        private void Awake()
         {
             InitializePools();
         }

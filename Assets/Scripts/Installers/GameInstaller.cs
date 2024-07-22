@@ -15,6 +15,11 @@ namespace Scripts.Installers
                 .AsSingle();
 
             Container
+                .Bind<GameManager>()
+                .FromComponentInHierarchy()
+                .AsSingle();
+
+            Container
                 .Bind<SectionPool>()
                 .FromComponentInHierarchy()
                 .AsSingle();
