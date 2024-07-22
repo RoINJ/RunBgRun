@@ -28,18 +28,19 @@ namespace Scripts.Runner.Sections
         private void Awake()
         {
             _sectionPool = new ObjectPool<GameObject>(
-                createFunc: () =>
-                {
-                    var section = _container.InstantiatePrefabForComponent<SectionMovement>(_sectionPrefab);
-                    section.gameObject.SetActive(true);
-                    return section.gameObject;
-                },
+                createFunc: CreateSection,
                 actionOnGet: section => section.SetActive(true),
                 actionOnRelease: section => section.SetActive(false),
-                actionOnDestroy: section => Destroy(section),
-                defaultCapacity: SectionCount,
-                maxSize: SectionCount
+                actionOnDestroy: Destroy,
+                defaultCapacity: SectionCount
             );
+        }
+
+        private GameObject CreateSection()
+        {
+            var section = _container.InstantiatePrefabForComponent<SectionMovement>(_sectionPrefab);
+            section.gameObject.SetActive(true);
+            return section.gameObject;
         }
     }
 }
