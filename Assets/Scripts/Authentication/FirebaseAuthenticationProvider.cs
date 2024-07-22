@@ -8,13 +8,31 @@ namespace Scripts.Authentication
 {
     public class FirebaseAuthenticationProvider : IAuthenticationProvider
     {
+        public bool IsInitialized { get; private set; }
+
         public User CurrentUser => FirebaseAuth.DefaultInstance.CurrentUser is null
-            ? null :
-            new User
+            ? null
+            : new User
             {
                 Email = FirebaseAuth.DefaultInstance.CurrentUser.Email,
                 Username = FirebaseAuth.DefaultInstance.CurrentUser.DisplayName
             };
+
+        public void InitializeFirebase()
+        {
+            FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task =>
+            {
+                var dependencyStatus = task.Result;
+                if (dependencyStatus == DependencyStatus.Available)
+                {
+                    IsInitialized = true;
+                }
+                else
+                {
+                    Debug.LogError($"Could not resolve all Firebase dependencies: {dependencyStatus}");
+                }
+            });
+        }
 
         public IEnumerator SignIn(string email, string password, Action<User> onSuccess, Action<string> onFailure)
         {
@@ -120,5 +138,7 @@ namespace Scripts.Authentication
                 }
             }
         }
+
+        public void SignOut() => FirebaseAuth.DefaultInstance.SignOut();
     }
 }

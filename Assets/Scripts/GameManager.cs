@@ -57,6 +57,7 @@ namespace Scripts
 
         private void StartGame()
         {
+            _gameState = EGameState.Started;
             var sections = FindObjectsOfType<SectionMovement>();
             Array.ForEach(sections, s => s.enabled = true);
 
@@ -64,10 +65,13 @@ namespace Scripts
 
             _scoreManager.enabled = true;
             _runSpeedManager.enabled = true;
+
+            _gameMenuUIManager.ShowInGameMenu();
         }
 
         public void OnPlayerDeath()
         {
+            _gameState = EGameState.PlayerDead;
             var sections = FindObjectsOfType<SectionMovement>();
             Array.ForEach(sections, s => s.enabled = false);
 
@@ -81,26 +85,19 @@ namespace Scripts
 
         public void ToMainMenu()
         {
+            _gameState = EGameState.MainMenu;
+            _gameMenuUIManager.ShowMainMenu();
+        }
+
+        public void Restart()
+        {
             var currentSceneName = SceneManager.GetActiveScene().name;
             SceneManager.LoadScene(currentSceneName);
         }
 
         public void ShowAdToRespawn()
         {
-            _adManager.ShowRewardedAd(Respawn);
-        }
-
-        private void Respawn()
-        {
-            var sections = FindObjectsOfType<SectionMovement>();
-            Array.ForEach(sections, s => s.enabled = true);
-
-            _playerMovement.enabled = true;
-
-            _scoreManager.enabled = true;
-            _runSpeedManager.enabled = true;
-
-            _gameMenuUIManager.ShowInGameMenu();
+            _adManager.ShowRewardedAd(StartGame);
         }
     }
 }

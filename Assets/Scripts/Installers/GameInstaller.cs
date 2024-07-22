@@ -10,8 +10,22 @@ namespace Scripts.Installers
         public override void InstallBindings()
         {
             Container
-                .Bind<IAuthenticationProvider>()
-                .To<FirebaseAuthenticationProvider>()
+                .BindInterfacesAndSelfTo<FirebaseAuthenticationProvider>()
+                .AsSingle();
+
+            Container
+                .Bind<FirebaseInitializer>()
+                .FromComponentInHierarchy()
+                .AsSingle();
+
+            Container
+                .Bind<AuthUIManager>()
+                .FromComponentInHierarchy()
+                .AsSingle();
+
+            Container
+                .Bind<GameMenuUIManager>()
+                .FromComponentInHierarchy()
                 .AsSingle();
 
             Container

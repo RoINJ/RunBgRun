@@ -34,6 +34,14 @@ namespace Scripts
 #endif
         }
 
+        public void ShowMainMenu()
+        {
+            _mainMenuPanel.SetActive(true);
+            _scoreboardPanel.SetActive(false);
+            _deathMenuPanel.SetActive(false);
+            _inGamePanel.SetActive(false);
+        }
+
         public void ShowDeathPanel()
         {
             _mainMenuPanel.SetActive(false);
@@ -48,6 +56,22 @@ namespace Scripts
             _scoreboardPanel.SetActive(false);
             _deathMenuPanel.SetActive(false);
             _inGamePanel.SetActive(true);
+        }
+
+        public void ShowScoreboard()
+        {
+            _mainMenuPanel.SetActive(false);
+            _scoreboardPanel.SetActive(true);
+            _deathMenuPanel.SetActive(false);
+            _inGamePanel.SetActive(false);
+        }
+
+        public void HideAll()
+        {
+            _mainMenuPanel.SetActive(false);
+            _scoreboardPanel.SetActive(false);
+            _deathMenuPanel.SetActive(false);
+            _inGamePanel.SetActive(false);
         }
     }
 }

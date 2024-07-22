@@ -10,11 +10,6 @@ namespace Scripts.Authentication
         [SerializeField]
         private GameObject _signUpPanel;
 
-        void Start()
-        {
-            ShowSignInPanel();
-        }
-
         public void ShowSignInPanel()
         {
             _signInPanel.SetActive(true);
