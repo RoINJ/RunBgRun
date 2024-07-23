@@ -9,7 +9,7 @@ namespace Scripts
 #if UNITY_ANDROID
         private string _adUnitId = "ca-app-pub-3940256099942544/5224354917";
 #else
-  private string _adUnitId = "Not configured";
+        private string _adUnitId = "Not configured";
 #endif
 
         private RewardedAd _rewardedAd;
