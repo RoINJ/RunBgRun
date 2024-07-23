@@ -1,10 +1,11 @@
+using DG.Tweening;
 using UnityEngine;
 
 namespace Scripts.Runner.Player
 {
     public class PlayerMovement : MonoBehaviour, IMovementHandler
     {
-        public const float LaneDistance = 1f;
+        private const float _switchLineAnimationDuration = 0.3f;
 
         [SerializeField]
         private Collider _defaultCollider;
@@ -22,9 +23,12 @@ namespace Scripts.Runner.Player
         private ECurrentAction _currentAction = ECurrentAction.None;
 
         private IInputHandler _inputHandler;
+        private float _startPositionX;
 
         private void Start()
         {
+            _startPositionX = transform.position.x;
+
 #if (UNITY_ANDROID || UNITY_IOS) && !DEBUG
             _inputHandler = new SwipesInputHandler(this);
 #else
@@ -62,9 +66,8 @@ namespace Scripts.Runner.Player
                 var targetLane = _currentLane + direction;
                 if (targetLane >= -1 && targetLane <= 1)
                 {
+                    transform.DOMoveX(targetLane + _startPositionX, _switchLineAnimationDuration);
                     _currentLane = targetLane;
-                    var deltaPosition = new Vector3(direction * LaneDistance, 0, 0);
-                    transform.position += deltaPosition;
                 }
             }
         }

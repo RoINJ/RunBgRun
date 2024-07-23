@@ -25,6 +25,8 @@ namespace Scripts
         private AdManager _adManager;
         private ScoreSaver _scoreSaver;
 
+        private GameObject _lastObstacle;
+
         [Inject]
         private void Init(AdManager adManager)
         {
@@ -71,8 +73,10 @@ namespace Scripts
             _gameMenuUIManager.ShowInGameMenu();
         }
 
-        public void OnPlayerDeath()
+        public void OnPlayerDeath(GameObject obstacle)
         {
+            _lastObstacle = obstacle;
+
             _gameState = EGameState.PlayerDead;
             var sections = FindObjectsOfType<SectionMovement>();
             Array.ForEach(sections, s => s.enabled = false);
@@ -106,7 +110,15 @@ namespace Scripts
 
         public void ShowAdToRespawn()
         {
-            _adManager.ShowRewardedAd(StartGame);
+            _adManager.ShowRewardedAd(Respawn);
+        }
+
+        private void Respawn()
+        {
+            Destroy(_lastObstacle);
+            _lastObstacle = null;
+            _playerMovement.GetComponent<RespawnHelper>().Respawn();
+            StartGame();
         }
     }
 }
