@@ -7,10 +7,10 @@ namespace Scripts.Authentication
     public class SignInHelper : MonoBehaviour
     {
         [SerializeField]
-        private TextMeshProUGUI _emailField;
+        private TMP_InputField _emailField;
 
         [SerializeField]
-        private TextMeshProUGUI _passwordField;
+        private TMP_InputField _passwordField;
 
         private IAuthenticationProvider _authProvider;
         private AuthUIManager _authUIManager;
@@ -22,6 +22,11 @@ namespace Scripts.Authentication
             _authProvider = authProvider;
             _authUIManager = authUIManager;
             _gameManager = gameManager;
+        }
+
+        private void Start()
+        {
+            _passwordField.inputType = TMP_InputField.InputType.Password;
         }
 
         public void SignIn()

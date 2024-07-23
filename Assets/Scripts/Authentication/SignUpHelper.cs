@@ -7,16 +7,16 @@ namespace Scripts.Authentication
     public class SignUpHelper : MonoBehaviour
     {
         [SerializeField]
-        private TextMeshProUGUI _usernameField;
+        private TMP_InputField _usernameField;
 
         [SerializeField]
-        private TextMeshProUGUI _emailField;
+        private TMP_InputField _emailField;
 
         [SerializeField]
-        private TextMeshProUGUI _passwordField;
+        private TMP_InputField _passwordField;
 
         [SerializeField]
-        private TextMeshProUGUI _confirmPasswordField;
+        private TMP_InputField _confirmPasswordField;
 
         private IAuthenticationProvider _authProvider;
         private AuthUIManager _authUIManager;
@@ -26,6 +26,12 @@ namespace Scripts.Authentication
         {
             _authProvider = authProvider;
             _authUIManager = authUIManager;
+        }
+
+        private void Start()
+        {
+            _passwordField.inputType = TMP_InputField.InputType.Password;
+            _confirmPasswordField.inputType = TMP_InputField.InputType.Password;
         }
 
         public void SignUp()
