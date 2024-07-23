@@ -23,6 +23,7 @@ namespace Scripts
         private EGameState _gameState;
 
         private AdManager _adManager;
+        private ScoreSaver _scoreSaver;
 
         [Inject]
         private void Init(AdManager adManager)
@@ -35,6 +36,7 @@ namespace Scripts
             _playerMovement.enabled = false;
 
             _scoreManager = GetComponent<ScoreManager>();
+            _scoreSaver = GetComponent<ScoreSaver>();
             _runSpeedManager = GetComponent<RunSpeedManager>();
         }
 
@@ -89,8 +91,15 @@ namespace Scripts
             _gameMenuUIManager.ShowMainMenu();
         }
 
+        public void ShowScoreboard()
+        {
+            _gameState = EGameState.Scoreboard;
+            _gameMenuUIManager.ShowScoreboard();
+        }
+
         public void Restart()
         {
+            _scoreSaver.SaveScore();
             var currentSceneName = SceneManager.GetActiveScene().name;
             SceneManager.LoadScene(currentSceneName);
         }

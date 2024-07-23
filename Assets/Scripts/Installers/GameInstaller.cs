@@ -2,6 +2,8 @@ using Scripts.Authentication;
 using Scripts.Runner.Sections.Obstacles;
 using Scripts.Runner.Sections;
 using Zenject;
+using Firebase.Database;
+using Scripts.Runner.Score;
 
 namespace Scripts.Installers
 {
@@ -10,7 +12,15 @@ namespace Scripts.Installers
         public override void InstallBindings()
         {
             Container
+                .BindInstance(FirebaseDatabase.GetInstance(Constants.DatabaseUrl).RootReference)
+                .AsSingle();
+                
+            Container
                 .BindInterfacesAndSelfTo<FirebaseAuthenticationProvider>()
+                .AsSingle();
+
+            Container
+                .BindInterfacesAndSelfTo<FirebaseScoreStorage>()
                 .AsSingle();
 
             Container

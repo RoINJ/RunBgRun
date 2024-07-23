@@ -8,10 +8,17 @@ namespace Scripts.Runner.Sections
     {
         private SectionPool _sectionPool;
 
+        private bool _wasRespawned;
+
         [Inject]
         private void Init(SectionPool sectionPool)
         {
             _sectionPool = sectionPool;
+        }
+
+        private void OnDisable()
+        {
+            _wasRespawned = false;
         }
 
         private void OnTriggerEnter(Collider other)
@@ -24,10 +31,16 @@ namespace Scripts.Runner.Sections
 
         private void SpawnNewSection()
         {
-            var section = _sectionPool.Get();
-            section.transform.position = transform.parent.position + Vector3.forward * Constants.SectionLength * Constants.ActiveSectionsCount;
+            if (!_wasRespawned)
+            {
+                _wasRespawned = true;
 
-            section.GetComponentInParent<ObstaclesSpawner>().SpawnObstacles();
+                var section = _sectionPool.Get();
+                section.transform.position = transform.parent.position +
+                    Vector3.forward * Constants.SectionLength * Constants.ActiveSectionsCount;
+
+                section.GetComponentInParent<ObstaclesSpawner>().SpawnObstacles();
+            }
         }
     }
 }
