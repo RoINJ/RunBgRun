@@ -25,8 +25,8 @@ namespace Scripts.Runner.Player
             {
                 Debug.Log("Player is dead");
 
-                _gameManager.OnPlayerDeath();
                 //_animator.SetTrigger("DeathTrigger");
+                _gameManager.OnPlayerDeath();
             }
         }
     }
