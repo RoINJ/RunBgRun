@@ -28,24 +28,28 @@ namespace Scripts.Runner.Score
 
         public void GetTopScores(Action<IReadOnlyList<ScoreEntity>> resultCallback)
         {
-            _databaseReference.Child("scores").GetValueAsync().ContinueWithOnMainThread(task =>
-            {
-                var result = task.Result.Children
-                    .Take(Constants.ScoreboardLength)
-                    .Select(snapshot =>
-                    {
-                        var score = (IDictionary)snapshot.Value;
-                        return new ScoreEntity
+            _databaseReference
+                .Child("scores")
+                .OrderByChild(nameof(ScoreEntity.Score))
+                .LimitToLast(Constants.ScoreboardLength)
+                .GetValueAsync()
+                .ContinueWithOnMainThread(task =>
+                {
+                    var result = task.Result.Children
+                        .Select(snapshot =>
                         {
-                            Username = score["Username"].ToString(),
-                            Score = int.Parse(score["Score"].ToString())
-                        };
-                    })
-                    .OrderByDescending(s => s.Score)
-                    .ToList();
+                            var score = (IDictionary)snapshot.Value;
+                            return new ScoreEntity
+                            {
+                                Username = score[nameof(ScoreEntity.Username)].ToString(),
+                                Score = int.Parse(score[nameof(ScoreEntity.Score)].ToString())
+                            };
+                        })
+                        .OrderByDescending(s => s.Score)
+                        .ToList();
 
-                resultCallback?.Invoke(result);
-            });
+                    resultCallback?.Invoke(result);
+                });
         }
     }
 }
