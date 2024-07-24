@@ -12,7 +12,7 @@ namespace Scripts.Installers
         public override void InstallBindings()
         {
             Container
-                .BindInstance(FirebaseDatabase.GetInstance(Constants.DatabaseUrl).RootReference)
+                .BindInstance(FirebaseDatabase.DefaultInstance.RootReference)
                 .AsSingle();
                 
             Container
@@ -21,12 +21,7 @@ namespace Scripts.Installers
 
             Container
                 .BindInterfacesAndSelfTo<FirebaseScoreStorage>()
-                .AsSingle();
-
-            Container
-                .Bind<FirebaseInitializer>()
-                .FromComponentInHierarchy()
-                .AsSingle();
+                .AsTransient();
 
             Container
                 .Bind<AuthUIManager>()

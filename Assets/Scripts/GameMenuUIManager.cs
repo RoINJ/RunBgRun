@@ -34,44 +34,16 @@ namespace Scripts
 #endif
         }
 
-        public void ShowMainMenu()
+        public void SetActivePanel(EGameMenuState activePanel)
         {
-            _mainMenuPanel.SetActive(true);
-            _scoreboardPanel.SetActive(false);
-            _deathMenuPanel.SetActive(false);
-            _inGamePanel.SetActive(false);
+            _mainMenuPanel.SetActive(activePanel == EGameMenuState.MainMenu);
+            _scoreboardPanel.SetActive(activePanel == EGameMenuState.Scoreboard);
+            _deathMenuPanel.SetActive(activePanel == EGameMenuState.DeathMenu);
+            _inGamePanel.SetActive(activePanel == EGameMenuState.InGame);
         }
 
-        public void ShowDeathPanel()
-        {
-            _mainMenuPanel.SetActive(false);
-            _scoreboardPanel.SetActive(false);
-            _deathMenuPanel.SetActive(true);
-            _inGamePanel.SetActive(false);
-        }
-
-        public void ShowInGameMenu()
-        {
-            _mainMenuPanel.SetActive(false);
-            _scoreboardPanel.SetActive(false);
-            _deathMenuPanel.SetActive(false);
-            _inGamePanel.SetActive(true);
-        }
-
-        public void ShowScoreboard()
-        {
-            _mainMenuPanel.SetActive(false);
-            _scoreboardPanel.SetActive(true);
-            _deathMenuPanel.SetActive(false);
-            _inGamePanel.SetActive(false);
-        }
-
-        public void HideAll()
-        {
-            _mainMenuPanel.SetActive(false);
-            _scoreboardPanel.SetActive(false);
-            _deathMenuPanel.SetActive(false);
-            _inGamePanel.SetActive(false);
-        }
+        public void ShowMainMenu() => SetActivePanel(EGameMenuState.MainMenu);
+        
+        public void ShowScoreboard() => SetActivePanel(EGameMenuState.Scoreboard);
     }
 }

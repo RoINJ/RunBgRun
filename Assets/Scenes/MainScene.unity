@@ -745,6 +745,7 @@ GameObject:
   - component: {fileID: 570502670}
   - component: {fileID: 570502672}
   - component: {fileID: 570502671}
+  - component: {fileID: 570502673}
   m_Layer: 0
   m_Name: MainMenuPanel
   m_TagString: Untagged
@@ -813,6 +814,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 570502669}
   m_CullTransparentMesh: 1
+--- !u!114 &570502673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 570502669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06d9bd25e637c4b21ac8f423148e4c6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &665209465
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1018,9 +1031,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1756992722}
-        m_TargetAssemblyTypeName: Scripts.GameManager, Assembly-CSharp
-        m_MethodName: ToMainMenu
+      - m_Target: {fileID: 1637478062}
+        m_TargetAssemblyTypeName: Scripts.GameMenuUIManager, Assembly-CSharp
+        m_MethodName: ShowMainMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3254,8 +3267,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1756992722}
-        m_TargetAssemblyTypeName: Scripts.GameManager, Assembly-CSharp
+      - m_Target: {fileID: 1637478062}
+        m_TargetAssemblyTypeName: Scripts.GameMenuUIManager, Assembly-CSharp
         m_MethodName: ShowScoreboard
         m_Mode: 1
         m_Arguments:

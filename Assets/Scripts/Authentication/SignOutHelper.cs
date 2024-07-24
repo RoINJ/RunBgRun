@@ -23,7 +23,7 @@ namespace Scripts.Authentication
         public void SignOut()
         {
             _authProvider.SignOut();
-            _gameMenuUIManager.HideAll();
+            _gameMenuUIManager.SetActivePanel(EGameMenuState.None);
             _authUIManager.ShowSignInPanel();
         }
     }

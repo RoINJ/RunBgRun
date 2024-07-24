@@ -17,7 +17,7 @@ namespace Scripts
                 var dependencyStatus = task.Result;
                 if (dependencyStatus == DependencyStatus.Available)
                 {
-                    FirebaseApp.DefaultInstance.Options.DatabaseUrl = new Uri(Constants.DatabaseUrl);
+                    //FirebaseApp.DefaultInstance.Options.DatabaseUrl = new Uri(Constants.DatabaseUrl);
                     firebaseAuthenticationProvider.IsInitialized = true;
                 }
                 else

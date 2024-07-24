@@ -4,7 +4,6 @@ using Scripts.Runner.Player;
 using Scripts.Runner.Score;
 using Scripts.Runner.Sections;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using Zenject;
 
@@ -20,8 +19,6 @@ namespace Scripts
 
         private ScoreManager _scoreManager;
         private RunSpeedManager _runSpeedManager;
-
-        private EGameState _gameState;
 
         private AdManager _adManager;
         private ScoreSaver _scoreSaver;
@@ -43,65 +40,20 @@ namespace Scripts
             _runSpeedManager = GetComponent<RunSpeedManager>();
         }
 
-        private void Update()
+        public void StartGame()
         {
-            if (_gameState == EGameState.MainMenu)
-            {
-                HandleInputs();
-            }
-        }
+            SetGameRunning(true);
 
-        private void HandleInputs()
-        {
-            if (Input.GetKeyDown(KeyCode.Space) ||
-                (Input.touchCount > 0
-                && Input.GetTouch(0).phase == TouchPhase.Began
-                && !EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId)))
-            {
-                StartGame();
-            }
-        }
-
-        private void StartGame()
-        {
-            _gameState = EGameState.Started;
-            var sections = FindObjectsOfType<SectionMovement>();
-            Array.ForEach(sections, s => s.enabled = true);
-
-            _playerMovement.enabled = true;
-
-            _scoreManager.enabled = true;
-            _runSpeedManager.enabled = true;
-
-            _gameMenuUIManager.ShowInGameMenu();
+            _gameMenuUIManager.SetActivePanel(EGameMenuState.InGame);
         }
 
         public void OnPlayerDeath(GameObject obstacle)
         {
             _lastObstacle = obstacle;
 
-            _gameState = EGameState.PlayerDead;
-            var sections = FindObjectsOfType<SectionMovement>();
-            Array.ForEach(sections, s => s.enabled = false);
+            SetGameRunning(false);
 
-            _playerMovement.enabled = false;
-
-            _scoreManager.enabled = false;
-            _runSpeedManager.enabled = false;
-
-            _gameMenuUIManager.ShowDeathPanel();
-        }
-
-        public void ToMainMenu()
-        {
-            _gameState = EGameState.MainMenu;
-            _gameMenuUIManager.ShowMainMenu();
-        }
-
-        public void ShowScoreboard()
-        {
-            _gameState = EGameState.Scoreboard;
-            _gameMenuUIManager.ShowScoreboard();
+            _gameMenuUIManager.SetActivePanel(EGameMenuState.DeathMenu);
         }
 
         public void Restart()
@@ -120,8 +72,20 @@ namespace Scripts
         {
             Destroy(_lastObstacle);
             _lastObstacle = null;
+            
             _playerMovement.GetComponent<RespawnHelper>().Respawn();
             StartGame();
+        }
+
+        private void SetGameRunning(bool isRunning)
+        {
+            var sections = FindObjectsOfType<SectionMovement>();
+            Array.ForEach(sections, s => s.enabled = isRunning);
+
+            _playerMovement.enabled = isRunning;
+
+            _scoreManager.enabled = isRunning;
+            _runSpeedManager.enabled = isRunning;
         }
     }
 }

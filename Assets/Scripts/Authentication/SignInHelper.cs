@@ -20,14 +20,17 @@ namespace Scripts.Authentication
 
         private IAuthenticationProvider _authProvider;
         private AuthUIManager _authUIManager;
-        private GameManager _gameManager;
+        private GameMenuUIManager _gameMenuUIManager;
 
         [Inject]
-        private void Init(IAuthenticationProvider authProvider, AuthUIManager authUIManager, GameManager gameManager)
+        private void Init(
+            IAuthenticationProvider authProvider, 
+            AuthUIManager authUIManager,
+            GameMenuUIManager gameMenuUIManager)
         {
             _authProvider = authProvider;
             _authUIManager = authUIManager;
-            _gameManager = gameManager;
+            _gameMenuUIManager = gameMenuUIManager;
         }
 
         private void Start()
@@ -82,7 +85,7 @@ namespace Scripts.Authentication
 
             Debug.Log($"User {user.Username} signed in successfully");
             _authUIManager.HideAll();
-            _gameManager.ToMainMenu();
+            _gameMenuUIManager.ShowMainMenu();
         }
 
         private void SetError(string message)

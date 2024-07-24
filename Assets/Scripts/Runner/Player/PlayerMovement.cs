@@ -54,7 +54,7 @@ namespace Scripts.Runner.Player
         private void StartRun()
         {
             _animator = GetComponentInChildren<Animator>();
-            _animator.SetTrigger("RunTrigger");
+            _animator.SetTrigger(Constants.Triggers.RunTrigger);
         }
 
         public void ChangeLane(int direction)
@@ -79,7 +79,7 @@ namespace Scripts.Runner.Player
                 _defaultCollider.enabled = false;
                 _slideCollider.enabled = true;
 
-                _animator.SetTrigger("SlideTrigger");
+                _animator.SetTrigger(Constants.Triggers.SlideTrigger);
             }
         }
 
@@ -100,7 +100,7 @@ namespace Scripts.Runner.Player
                 _defaultCollider.enabled = false;
                 _jumpCollider.enabled = true;
 
-                _animator.SetTrigger("JumpTrigger");
+                _animator.SetTrigger(Constants.Triggers.JumpTrigger);
             }
         }
 

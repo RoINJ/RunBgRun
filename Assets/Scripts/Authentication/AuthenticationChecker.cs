@@ -9,18 +9,18 @@ namespace Scripts
     {
         private AuthUIManager _authUIManager;
 
-        private GameManager _gameManager;
+        private GameMenuUIManager _gameMenuUIManager;
 
         private IAuthenticationProvider _authenticationProvider;
 
         [Inject]
         private void Init(
             IAuthenticationProvider authenticationProvider,
-            GameManager gameManager,
+            GameMenuUIManager gameMenuUIManager,
             AuthUIManager authUIManager)
         {
             _authenticationProvider = authenticationProvider;
-            _gameManager = gameManager;
+            _gameMenuUIManager = gameMenuUIManager;
             _authUIManager = authUIManager;
         }
 
@@ -34,7 +34,7 @@ namespace Scripts
             }
             else
             {
-                _gameManager.ToMainMenu();
+                _gameMenuUIManager.ShowMainMenu();
             }
         }
     }

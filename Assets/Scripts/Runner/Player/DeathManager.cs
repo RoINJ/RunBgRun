@@ -7,6 +7,8 @@ namespace Scripts.Runner.Player
 {
     public class DeathManager : MonoBehaviour
     {
+        private const float DeathAnimationTime = 0.5f;
+
         private GameManager _gameManager;
         private Animator _animator;
 
@@ -27,7 +29,7 @@ namespace Scripts.Runner.Player
             {
                 Debug.Log("Player is dead");
 
-                _animator.speed = 0;
+                _animator.SetTrigger(Constants.Triggers.DeathTrigger);
 
                 switch (obstacle.ObstacleType)
                 {
@@ -44,10 +46,11 @@ namespace Scripts.Runner.Player
             }
         }
 
-        private void FallForwards() =>
-            transform.DORotate(new Vector3(80f, transform.rotation.y, transform.rotation.z), 0.5f);
+        private void FallForwards() => RotateXAnimated(80f);
 
-        private void FallBackwards() =>
-            transform.DORotate(new Vector3(-80f, transform.rotation.y, transform.rotation.z), 0.5f);
+        private void FallBackwards() => RotateXAnimated(-80f);
+
+        private void RotateXAnimated(float x) =>
+            transform.DORotate(new Vector3(x, transform.rotation.y, transform.rotation.z), DeathAnimationTime);
     }
 }
