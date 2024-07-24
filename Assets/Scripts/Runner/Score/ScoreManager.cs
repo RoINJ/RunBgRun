@@ -18,13 +18,6 @@ namespace Scripts.Runner.Score
         private void Start()
         {
             _runSpeedManager = GetComponent<RunSpeedManager>();
-            
-            ResetScore();
-        }
-
-        private void OnEnable()
-        {
-            ResetScore();
         }
 
         private void Update()
@@ -36,12 +29,6 @@ namespace Scripts.Runner.Score
         {
             _score += score;
             _scoreLabel.text = Score.ToString();
-        }
-
-        private void ResetScore()
-        {
-            _score = 0;
-            _scoreLabel.text = _score.ToString();
         }
     }
 }
