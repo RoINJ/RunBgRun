@@ -29,7 +29,7 @@ namespace Scripts.Runner.Player
         {
             _startPositionX = transform.position.x;
 
-#if (UNITY_ANDROID || UNITY_IOS) && !DEBUG
+#if (UNITY_ANDROID || UNITY_IOS) && !UNITY_EDITOR
             _inputHandler = new SwipesInputHandler(this);
 #else
             _inputHandler = new KeysInputHandler(this);
