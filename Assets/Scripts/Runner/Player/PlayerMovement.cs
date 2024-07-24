@@ -1,4 +1,5 @@
 using DG.Tweening;
+using Scripts.Runner.Player.PlayerStates;
 using UnityEngine;
 
 namespace Scripts.Runner.Player
@@ -16,16 +17,17 @@ namespace Scripts.Runner.Player
         [SerializeField]
         private Collider _slideCollider;
 
-        private Animator _animator;
-
         private int _currentLane = 0;
 
-        private ECurrentAction _currentAction = ECurrentAction.None;
-
-        private IInputHandler _inputHandler;
         private float _startPositionX;
+        private PlayerState _currentState;
+        private IInputHandler _inputHandler;
 
-        private void Start()
+        public Collider DefaultCollider => _defaultCollider;
+        public Collider JumpCollider => _jumpCollider;
+        public Collider SlideCollider => _slideCollider;
+
+        private void Awake()
         {
             _startPositionX = transform.position.x;
 
@@ -38,78 +40,37 @@ namespace Scripts.Runner.Player
 
         private void OnEnable()
         {
-            StartRun();
+            SetState(new RunningState(this, _inputHandler));
         }
 
         private void Update()
         {
-            _inputHandler.HandleInput();
-        }
-
-        private void FixedUpdate()
-        {
-            transform.position = new Vector3(transform.position.x, transform.position.y, 0);
-        }
-
-        private void StartRun()
-        {
-            _animator = GetComponentInChildren<Animator>();
-            _animator.SetTrigger(Constants.Triggers.RunTrigger);
+            _currentState.Update();
         }
 
         public void ChangeLane(int direction)
         {
-            if (_currentAction == ECurrentAction.None)
+            var targetLane = _currentLane + direction;
+            if (targetLane >= -1 && targetLane <= 1)
             {
-                var targetLane = _currentLane + direction;
-                if (targetLane >= -1 && targetLane <= 1)
-                {
-                    transform.DOMoveX(targetLane + _startPositionX, _switchLineAnimationDuration);
-                    _currentLane = targetLane;
-                }
+                transform.DOMoveX(targetLane + _startPositionX, _switchLineAnimationDuration);
+                _currentLane = targetLane;
             }
         }
 
-        public void Slide()
+        public void Slide() => SetState(new SlidingState(this));
+
+        public void EndSlide() => SetState(new RunningState(this, _inputHandler));
+
+        public void Jump() => SetState(new JumpingState(this));
+
+        public void EndJump() => SetState(new RunningState(this, _inputHandler));
+
+        private void SetState(PlayerState state)
         {
-            if (_currentAction == ECurrentAction.None)
-            {
-                _currentAction = ECurrentAction.Slide;
-
-                _defaultCollider.enabled = false;
-                _slideCollider.enabled = true;
-
-                _animator.SetTrigger(Constants.Triggers.SlideTrigger);
-            }
-        }
-
-        public void EndSlide()
-        {
-            _currentAction = ECurrentAction.None;
-
-            _slideCollider.enabled = false;
-            _defaultCollider.enabled = true;
-        }
-
-        public void Jump()
-        {
-            if (_currentAction == ECurrentAction.None)
-            {
-                _currentAction = ECurrentAction.Jump;
-
-                _defaultCollider.enabled = false;
-                _jumpCollider.enabled = true;
-
-                _animator.SetTrigger(Constants.Triggers.JumpTrigger);
-            }
-        }
-
-        public void EndJump()
-        {
-            _currentAction = ECurrentAction.None;
-
-            _jumpCollider.enabled = false;
-            _defaultCollider.enabled = true;
+            _currentState?.Exit();
+            _currentState = state;
+            _currentState.Enter();
         }
     }
 }
