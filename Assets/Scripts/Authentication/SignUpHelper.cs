@@ -6,27 +6,32 @@ namespace Scripts.Authentication
 {
     public class SignUpHelper : MonoBehaviour
     {
-        private IAuthenticationProvider _authProvider;
+        [SerializeField]
+        private TMP_InputField _usernameField;
 
         [SerializeField]
+        private TMP_InputField _emailField;
+
+        [SerializeField]
+        private TMP_InputField _passwordField;
+
+        [SerializeField]
+        private TMP_InputField _confirmPasswordField;
+
+        private IAuthenticationProvider _authProvider;
         private AuthUIManager _authUIManager;
 
-        [SerializeField]
-        private TextMeshProUGUI _usernameField;
-
-        [SerializeField]
-        private TextMeshProUGUI _emailField;
-
-        [SerializeField]
-        private TextMeshProUGUI _passwordField;
-
-        [SerializeField]
-        private TextMeshProUGUI _confirmPasswordField;
-
         [Inject]
-        public void Init(IAuthenticationProvider authProvider)
+        private void Init(IAuthenticationProvider authProvider, AuthUIManager authUIManager)
         {
             _authProvider = authProvider;
+            _authUIManager = authUIManager;
+        }
+
+        private void Start()
+        {
+            _passwordField.inputType = TMP_InputField.InputType.Password;
+            _confirmPasswordField.inputType = TMP_InputField.InputType.Password;
         }
 
         public void SignUp()
@@ -50,6 +55,11 @@ namespace Scripts.Authentication
 
         private void OnSuccess(User user)
         {
+            _usernameField.text = string.Empty;
+            _emailField.text = string.Empty;
+            _passwordField.text = string.Empty;
+            _confirmPasswordField.text = string.Empty;
+
             Debug.Log($"User {user.Username} signed in successfully");
             _authUIManager.ShowSignInPanel();
         }

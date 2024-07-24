@@ -1,28 +1,32 @@
-using System.Collections;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UIElements;
 using Zenject;
 
 namespace Scripts.Authentication
 {
     public class SignInHelper : MonoBehaviour
     {
+        [SerializeField]
+        private TMP_InputField _emailField;
+
+        [SerializeField]
+        private TMP_InputField _passwordField;
+
         private IAuthenticationProvider _authProvider;
-
-        [SerializeField]
         private AuthUIManager _authUIManager;
-
-        [SerializeField]
-        private TextMeshProUGUI _emailField;
-
-        [SerializeField]
-        private TextMeshProUGUI _passwordField;
+        private GameManager _gameManager;
 
         [Inject]
-        public void Init(IAuthenticationProvider authProvider)
+        private void Init(IAuthenticationProvider authProvider, AuthUIManager authUIManager, GameManager gameManager)
         {
             _authProvider = authProvider;
+            _authUIManager = authUIManager;
+            _gameManager = gameManager;
+        }
+
+        private void Start()
+        {
+            _passwordField.inputType = TMP_InputField.InputType.Password;
         }
 
         public void SignIn()
@@ -45,8 +49,12 @@ namespace Scripts.Authentication
 
         private void OnSignInSuccess(User user)
         {
+            _emailField.text = string.Empty;
+            _passwordField.text = string.Empty;
+
             Debug.Log($"User {user.Username} signed in successfully");
             _authUIManager.HideAll();
+            _gameManager.ToMainMenu();
         }
 
         private void OnAuthFailure(string message)

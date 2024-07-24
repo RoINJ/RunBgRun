@@ -5,32 +5,33 @@ namespace Scripts.Authentication
     public class AuthUIManager : MonoBehaviour
     {
         [SerializeField]
-        private GameObject signInPanel;
+        private GameObject _canvas;
 
         [SerializeField]
-        private GameObject signUpPanel;
+        private GameObject _signInPanel;
 
-        void Start()
-        {
-            ShowSignInPanel();
-        }
+        [SerializeField]
+        private GameObject _signUpPanel;
 
         public void ShowSignInPanel()
         {
-            signInPanel.SetActive(true);
-            signUpPanel.SetActive(false);
+            _canvas.SetActive(true);
+            _signInPanel.SetActive(true);
+            _signUpPanel.SetActive(false);
         }
 
         public void ShowSignUpPanel()
         {
-            signInPanel.SetActive(false);
-            signUpPanel.SetActive(true);
+            _canvas.SetActive(true);
+            _signInPanel.SetActive(false);
+            _signUpPanel.SetActive(true);
         }
 
         public void HideAll()
         {
-            signInPanel.SetActive(false);
-            signUpPanel.SetActive(false);
+            _canvas.SetActive(false);
+            _signInPanel.SetActive(false);
+            _signUpPanel.SetActive(false);
         }
     }
 }
