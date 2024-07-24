@@ -13,6 +13,9 @@ namespace Scripts.Authentication
         [SerializeField]
         private GameObject _signUpPanel;
 
+        [SerializeField]
+        private PopupHelper _errorPopup;
+
         public void ShowSignInPanel()
         {
             _canvas.SetActive(true);
@@ -32,6 +35,12 @@ namespace Scripts.Authentication
             _canvas.SetActive(false);
             _signInPanel.SetActive(false);
             _signUpPanel.SetActive(false);
+        }
+
+        public void ShowError(string message)
+        {
+            _errorPopup.gameObject.SetActive(true);
+            _errorPopup.Text = message;
         }
     }
 }

@@ -12,6 +12,8 @@ namespace Scripts
 
         public const int ScoreboardLength = 25;
 
+        public const string EmailRegex = @"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$";
+
         // TODO: Move to config file
         public const string DatabaseUrl = "https://runbgrun-c6887-default-rtdb.europe-west1.firebasedatabase.app/";
     }
