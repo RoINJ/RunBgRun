@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "607296179398",
+    "firebase_url": "https://runbgrun-c6887-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "runbgrun-c6887",
+    "storage_bucket": "runbgrun-c6887.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:607296179398:android:d13249f5b0b5f24c8c9bc7",
+        "android_client_info": {
+          "package_name": "com.roinj.runbgrun"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD8L_3x5pDeUFHH28yZE5bEHlQhdLPhdm4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
