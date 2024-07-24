@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
 using Zenject;
@@ -6,6 +9,9 @@ namespace Scripts.Authentication
 {
     public class SignUpHelper : MonoBehaviour
     {
+        [SerializeField]
+        private PopupHelper _popupPrefab;
+
         [SerializeField]
         private TMP_InputField _usernameField;
 
@@ -44,13 +50,48 @@ namespace Scripts.Authentication
 
                 StartCoroutine(
                     _authProvider.SignUp(
-                        email, password, username, OnSuccess, OnFailure));
+                        email, password, username, OnSuccess, SetError));
             }
         }
 
         private bool ValidateFields()
         {
-            return true;
+            var errors = new List<string>();
+
+            if (string.IsNullOrWhiteSpace(_usernameField.text))
+            {
+                errors.Add("Username is required");
+            }
+
+            if (string.IsNullOrWhiteSpace(_emailField.text))
+            {
+                errors.Add("Email is required");
+            }
+            else if (!Regex.IsMatch(_emailField.text, Constants.EmailRegex))
+            {
+                errors.Add("Email is invalid");
+            }
+
+            if (string.IsNullOrWhiteSpace(_passwordField.text))
+            {
+                errors.Add("Password is required");
+            }
+            else if (string.IsNullOrWhiteSpace(_confirmPasswordField.text))
+            {
+                errors.Add("Confirm Password is required");
+            }
+            else if (_passwordField.text != _confirmPasswordField.text)
+            {
+                errors.Add("Passwords do not match");
+            }
+
+            var isValid = !errors.Any();
+            if (!isValid)
+            {
+                SetError(string.Join("\n", errors));
+            }
+
+            return isValid;
         }
 
         private void OnSuccess(User user)
@@ -64,9 +105,11 @@ namespace Scripts.Authentication
             _authUIManager.ShowSignInPanel();
         }
 
-        private void OnFailure(string message)
+        private void SetError(string message)
         {
             Debug.LogError(message);
+
+            _authUIManager.ShowError(message);
         }
     }
 }

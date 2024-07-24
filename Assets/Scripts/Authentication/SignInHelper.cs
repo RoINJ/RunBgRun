@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
 using Zenject;
@@ -6,6 +9,9 @@ namespace Scripts.Authentication
 {
     public class SignInHelper : MonoBehaviour
     {
+        [SerializeField]
+        private PopupHelper _popupPrefab;
+
         [SerializeField]
         private TMP_InputField _emailField;
 
@@ -38,13 +44,35 @@ namespace Scripts.Authentication
 
                 StartCoroutine(
                     _authProvider.SignIn(
-                        email, password, OnSignInSuccess, OnAuthFailure));
+                        email, password, OnSignInSuccess, SetError));
             }
         }
 
         private bool ValidateFields()
         {
-            return true;
+            var errors = new List<string>();
+
+            if (string.IsNullOrWhiteSpace(_emailField.text))
+            {
+                errors.Add("Email is required");
+            }
+            else if (!Regex.IsMatch(_emailField.text, Constants.EmailRegex))
+            {
+                errors.Add("Email is invalid");
+            }
+
+            if (string.IsNullOrWhiteSpace(_passwordField.text))
+            {
+                errors.Add("Password is required");
+            }
+
+            var isValid = !errors.Any();
+            if (!isValid)
+            {
+                SetError(string.Join("\n", errors));
+            }
+
+            return isValid;
         }
 
         private void OnSignInSuccess(User user)
@@ -57,9 +85,11 @@ namespace Scripts.Authentication
             _gameManager.ToMainMenu();
         }
 
-        private void OnAuthFailure(string message)
+        private void SetError(string message)
         {
             Debug.LogError(message);
+
+            _authUIManager.ShowError(message);
         }
     }
 }
