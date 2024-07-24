@@ -4,6 +4,7 @@ using Scripts.Runner.Player;
 using Scripts.Runner.Score;
 using Scripts.Runner.Sections;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using Zenject;
 
@@ -53,7 +54,9 @@ namespace Scripts
         private void HandleInputs()
         {
             if (Input.GetKeyDown(KeyCode.Space) ||
-                (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began))
+                (Input.touchCount > 0
+                && Input.GetTouch(0).phase == TouchPhase.Began
+                && !EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId)))
             {
                 StartGame();
             }

@@ -15,10 +15,10 @@ namespace Scripts.Runner.Player
         {
             if (Input.touchCount > 0)
             {
-                Touch touch = Input.GetTouch(0);
+                var touch = Input.GetTouch(0);
                 if (touch.phase == TouchPhase.Ended)
                 {
-                    Vector2 swipeDelta = touch.deltaPosition;
+                    var swipeDelta = touch.deltaPosition;
                     if (Mathf.Abs(swipeDelta.x) > Mathf.Abs(swipeDelta.y))
                     {
                         var laneDelta = swipeDelta.x > 0 ? 1 : -1;

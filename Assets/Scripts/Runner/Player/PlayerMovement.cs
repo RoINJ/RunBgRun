@@ -59,8 +59,6 @@ namespace Scripts.Runner.Player
 
         public void ChangeLane(int direction)
         {
-            Debug.Log("Change lane");
-
             if (_currentAction == ECurrentAction.None)
             {
                 var targetLane = _currentLane + direction;

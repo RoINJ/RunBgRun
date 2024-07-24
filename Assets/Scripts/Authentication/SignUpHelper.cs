@@ -55,6 +55,11 @@ namespace Scripts.Authentication
 
         private void OnSuccess(User user)
         {
+            _usernameField.text = string.Empty;
+            _emailField.text = string.Empty;
+            _passwordField.text = string.Empty;
+            _confirmPasswordField.text = string.Empty;
+
             Debug.Log($"User {user.Username} signed in successfully");
             _authUIManager.ShowSignInPanel();
         }

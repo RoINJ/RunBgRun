@@ -49,6 +49,9 @@ namespace Scripts.Authentication
 
         private void OnSignInSuccess(User user)
         {
+            _emailField.text = string.Empty;
+            _passwordField.text = string.Empty;
+
             Debug.Log($"User {user.Username} signed in successfully");
             _authUIManager.HideAll();
             _gameManager.ToMainMenu();
