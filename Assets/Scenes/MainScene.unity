@@ -746,6 +746,7 @@ GameObject:
   - component: {fileID: 570502672}
   - component: {fileID: 570502671}
   - component: {fileID: 570502673}
+  - component: {fileID: 570502674}
   m_Layer: 0
   m_Name: MainMenuPanel
   m_TagString: Untagged
@@ -826,6 +827,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06d9bd25e637c4b21ac8f423148e4c6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &570502674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 570502669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1756992722}
+          m_TargetAssemblyTypeName: Scripts.GameManager, Assembly-CSharp
+          m_MethodName: StartGame
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1001 &665209465
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1213,6 +1243,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_UseGravity
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5820675376566702628, guid: e19994782fbf97940896842391bafe1d,
+        type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5852915922767013941, guid: e19994782fbf97940896842391bafe1d,
         type: 3}
