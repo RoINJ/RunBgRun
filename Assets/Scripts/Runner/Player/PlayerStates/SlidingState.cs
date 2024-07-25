@@ -1,5 +1,3 @@
-using UnityEngine;
-
 namespace Scripts.Runner.Player.PlayerStates
 {
     public class SlidingState : PlayerState

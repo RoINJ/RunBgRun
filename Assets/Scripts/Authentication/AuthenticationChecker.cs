@@ -1,9 +1,8 @@
 using System.Collections;
-using Scripts.Authentication;
 using UnityEngine;
 using Zenject;
 
-namespace Scripts
+namespace Scripts.Authentication
 {
     public class AuthenticationChecker : MonoBehaviour
     {

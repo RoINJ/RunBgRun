@@ -5,9 +5,9 @@ namespace Scripts.Runner.Player
     public class SwipesInputHandler : IInputHandler
     {
         private const float SwipeThreshold = 5f;
-        private bool _actionPerformed;
+        private readonly IMovementHandler _movementHandler;
 
-        private IMovementHandler _movementHandler;
+        private bool _actionPerformed;
 
         public SwipesInputHandler(IMovementHandler playerMovement)
         {

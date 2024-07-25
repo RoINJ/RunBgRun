@@ -4,7 +4,7 @@ namespace Scripts.Runner.Player.PlayerStates
 {
     public class RunningState : PlayerState
     {
-        private IInputHandler _inputHandler;
+        private readonly IInputHandler _inputHandler;
 
         public RunningState(PlayerMovement playerMovement, IInputHandler inputHandler) : base(playerMovement)
         {

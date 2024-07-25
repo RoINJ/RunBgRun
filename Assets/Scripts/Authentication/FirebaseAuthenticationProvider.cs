@@ -67,8 +67,8 @@ namespace Scripts.Authentication
             if (signUpTask.Exception != null)
             {
                 Debug.LogWarning(message: $"Failed to register task with {signUpTask.Exception}");
-                FirebaseException firebaseEx = signUpTask.Exception.GetBaseException() as FirebaseException;
-                AuthError errorCode = (AuthError)firebaseEx.ErrorCode;
+                var firebaseEx = signUpTask.Exception.GetBaseException() as FirebaseException;
+                var errorCode = (AuthError)firebaseEx.ErrorCode;
 
                 string message = "Register Failed!";
                 switch (errorCode)
@@ -103,7 +103,7 @@ namespace Scripts.Authentication
 
                     if (updateProfileTask.Exception != null)
                     {
-                        Debug.LogWarningFormat("Failed to register task with", updateProfileTask.Exception);
+                        Debug.LogWarningFormat("Failed to register task with {0}", updateProfileTask.Exception);
                     }
                     else
                     {

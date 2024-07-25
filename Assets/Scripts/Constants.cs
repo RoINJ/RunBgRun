@@ -2,6 +2,12 @@ namespace Scripts
 {
     public class Constants
     {
+#if UNITY_ANDROID
+        public const string AdUnitId = "ca-app-pub-3940256099942544/5224354917";
+#else
+        private string _adUnitId = "Not configured";
+#endif
+        
         public const float StartMovementSpeed = 0.1f;
         public const float SpeedIncreasingAcceleration = 0.00002f;
         public const float SectionLength = 20f;

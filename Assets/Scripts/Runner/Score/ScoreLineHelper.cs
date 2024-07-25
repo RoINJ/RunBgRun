@@ -1,8 +1,7 @@
-using Scripts.Runner.Score;
 using TMPro;
 using UnityEngine;
 
-namespace Scripts
+namespace Scripts.Runner.Score
 {
     public class ScoreLineHelper : MonoBehaviour
     {

@@ -4,7 +4,7 @@ namespace Scripts.Runner.Player
 {
     public class KeysInputHandler : IInputHandler
     {
-        private IMovementHandler _movementHandler;
+        private readonly IMovementHandler _movementHandler;
 
         public KeysInputHandler(IMovementHandler movementHandler)
         {

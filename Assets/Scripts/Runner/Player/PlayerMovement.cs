@@ -6,7 +6,7 @@ namespace Scripts.Runner.Player
 {
     public class PlayerMovement : MonoBehaviour, IMovementHandler
     {
-        private const float _switchLineAnimationDuration = 0.3f;
+        private const float SwitchLineAnimationDuration = 0.3f;
 
         [SerializeField]
         private Collider _defaultCollider;
@@ -17,7 +17,7 @@ namespace Scripts.Runner.Player
         [SerializeField]
         private Collider _slideCollider;
 
-        private int _currentLane = 0;
+        private int _currentLane;
 
         private float _startPositionX;
         private PlayerState _currentState;
@@ -53,7 +53,7 @@ namespace Scripts.Runner.Player
             var targetLane = _currentLane + direction;
             if (targetLane >= -1 && targetLane <= 1)
             {
-                transform.DOMoveX(targetLane + _startPositionX, _switchLineAnimationDuration);
+                transform.DOMoveX(targetLane + _startPositionX, SwitchLineAnimationDuration);
                 _currentLane = targetLane;
             }
         }

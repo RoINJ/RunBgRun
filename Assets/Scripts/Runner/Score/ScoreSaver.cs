@@ -1,9 +1,8 @@
 using Scripts.Authentication;
-using Scripts.Runner.Score;
 using UnityEngine;
 using Zenject;
 
-namespace Scripts
+namespace Scripts.Runner.Score
 {
     public class ScoreSaver : MonoBehaviour
     {
