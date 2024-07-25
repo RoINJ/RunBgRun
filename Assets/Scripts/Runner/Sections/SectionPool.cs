@@ -17,13 +17,13 @@ namespace Scripts.Runner.Sections
 
         public GameObject Get() => _sectionPool.Get();
 
+        public void Release(GameObject section) => _sectionPool.Release(section);
+
         [Inject]
         private void Init(DiContainer container)
         {
             _container = container;
         }
-
-        public void Release(GameObject section) => _sectionPool.Release(section);
 
         private void Awake()
         {

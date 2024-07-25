@@ -8,7 +8,19 @@ namespace Scripts
     {
         private RewardedAd _rewardedAd;
 
-        public void Start()
+        public void ShowRewardedAd(Action callback)
+        {
+            if (_rewardedAd is not null && _rewardedAd.CanShowAd())
+            {
+                _rewardedAd.Show(_ =>
+                {
+                    callback?.Invoke();
+                    LoadRewardedAd();
+                });
+            }
+        }
+
+        private void Start()
         {
             MobileAds.Initialize(_ => LoadRewardedAd());
         }
@@ -39,18 +51,6 @@ namespace Scripts
                                        "with error : " + error);
                     }
                 });
-        }
-
-        public void ShowRewardedAd(Action callback)
-        {
-            if (_rewardedAd is not null && _rewardedAd.CanShowAd())
-            {
-                _rewardedAd.Show(_ =>
-                {
-                    callback?.Invoke();
-                    LoadRewardedAd();
-                });
-            }
         }
     }
 }

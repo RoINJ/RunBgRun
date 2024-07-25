@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4771630197986093132}
+  - component: {fileID: 787413139751558468}
   - component: {fileID: 5393165782087448967}
   - component: {fileID: 4185764006750648719}
   m_Layer: 0
@@ -38,6 +39,18 @@ Transform:
   - {fileID: 3082693525255671722}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &787413139751558468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 293040878789378280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21f33b32f63f64f799191c4c00d97eb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &5393165782087448967
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -250,6 +263,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6a0653abb1c54415a8271ad262afa1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _obstaclesSpawner: {fileID: 4185764006750648719}
 --- !u!1 &7189366556266756214
 GameObject:
   m_ObjectHideFlags: 0

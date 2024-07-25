@@ -1,4 +1,3 @@
-using Scripts.Runner.Sections.Obstacles;
 using UnityEngine;
 using Zenject;
 
@@ -36,10 +35,10 @@ namespace Scripts.Runner.Sections
                 _wasRespawned = true;
 
                 var section = _sectionPool.Get();
-                section.transform.position = transform.parent.position +
+                var spawnPosition = transform.parent.position +
                     Vector3.forward * Constants.SectionLength * Constants.ActiveSectionsCount;
 
-                section.GetComponentInParent<ObstaclesSpawner>().SpawnObstacles();
+                section.GetComponent<SectionInitializer>().Initialize(spawnPosition);
             }
         }
     }

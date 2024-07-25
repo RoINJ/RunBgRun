@@ -1,4 +1,5 @@
 using System;
+using Scripts.GameMenu;
 using Scripts.Runner;
 using Scripts.Runner.Player;
 using Scripts.Runner.Score;
@@ -24,22 +25,7 @@ namespace Scripts
         private ScoreSaver _scoreSaver;
 
         private GameObject _lastObstacle;
-
-        [Inject]
-        private void Init(AdManager adManager)
-        {
-            _adManager = adManager;
-        }
-
-        private void Start()
-        {
-            _playerMovement.enabled = false;
-
-            _scoreManager = GetComponent<ScoreManager>();
-            _scoreSaver = GetComponent<ScoreSaver>();
-            _runSpeedManager = GetComponent<RunSpeedManager>();
-        }
-
+        
         public void StartGame()
         {
             SetGameRunning(true);
@@ -66,6 +52,22 @@ namespace Scripts
         public void ShowAdToRespawn()
         {
             _adManager.ShowRewardedAd(Respawn);
+        }
+        
+        
+        [Inject]
+        private void Init(AdManager adManager)
+        {
+            _adManager = adManager;
+        }
+
+        private void Start()
+        {
+            _playerMovement.enabled = false;
+
+            _scoreManager = GetComponent<ScoreManager>();
+            _scoreSaver = GetComponent<ScoreSaver>();
+            _runSpeedManager = GetComponent<RunSpeedManager>();
         }
 
         private void Respawn()

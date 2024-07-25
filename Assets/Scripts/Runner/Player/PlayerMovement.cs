@@ -17,6 +17,9 @@ namespace Scripts.Runner.Player
         [SerializeField]
         private Collider _slideCollider;
 
+        [SerializeField]
+        private Animator _animator;
+
         private int _currentLane;
 
         private float _startPositionX;
@@ -26,6 +29,26 @@ namespace Scripts.Runner.Player
         public Collider DefaultCollider => _defaultCollider;
         public Collider JumpCollider => _jumpCollider;
         public Collider SlideCollider => _slideCollider;
+
+        public void ChangeLane(int direction)
+        {
+            var targetLane = _currentLane + direction;
+            if (targetLane >= -1 && targetLane <= 1)
+            {
+                transform.DOMoveX(targetLane + _startPositionX, SwitchLineAnimationDuration);
+                _currentLane = targetLane;
+            }
+        }
+
+        public void Slide() => SetState(new SlidingState(this, _animator));
+
+        public void EndSlide() => Run();
+
+        public void Jump() => SetState(new JumpingState(this, _animator));
+
+        public void EndJump() => Run();
+
+        private void Run() => SetState(new RunningState(this, _animator, _inputHandler));
 
         private void Awake()
         {
@@ -40,31 +63,13 @@ namespace Scripts.Runner.Player
 
         private void OnEnable()
         {
-            SetState(new RunningState(this, _inputHandler));
+            Run();
         }
 
         private void Update()
         {
             _currentState.Update();
         }
-
-        public void ChangeLane(int direction)
-        {
-            var targetLane = _currentLane + direction;
-            if (targetLane >= -1 && targetLane <= 1)
-            {
-                transform.DOMoveX(targetLane + _startPositionX, SwitchLineAnimationDuration);
-                _currentLane = targetLane;
-            }
-        }
-
-        public void Slide() => SetState(new SlidingState(this));
-
-        public void EndSlide() => SetState(new RunningState(this, _inputHandler));
-
-        public void Jump() => SetState(new JumpingState(this));
-
-        public void EndJump() => SetState(new RunningState(this, _inputHandler));
 
         private void SetState(PlayerState state)
         {

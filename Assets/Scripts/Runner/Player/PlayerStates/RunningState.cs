@@ -6,7 +6,10 @@ namespace Scripts.Runner.Player.PlayerStates
     {
         private readonly IInputHandler _inputHandler;
 
-        public RunningState(PlayerMovement playerMovement, IInputHandler inputHandler) : base(playerMovement)
+        public RunningState(
+            PlayerMovement playerMovement,
+            Animator animator,
+            IInputHandler inputHandler) : base(playerMovement, animator)
         {
             _inputHandler = inputHandler;
         }

@@ -9,13 +9,10 @@ namespace Scripts.Runner.Player
     {
         private const float DeathAnimationTime = 0.5f;
 
-        private GameManager _gameManager;
+        [SerializeField]
         private Animator _animator;
 
-        private void Start()
-        {
-            _animator = GetComponentInChildren<Animator>();
-        }
+        private GameManager _gameManager;
 
         [Inject]
         private void Init(GameManager gameManager)
@@ -25,7 +22,7 @@ namespace Scripts.Runner.Player
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.GetComponent<Obstacle>() is Obstacle obstacle)
+            if (other.TryGetComponent<Obstacle>(out var obstacle))
             {
                 Debug.Log("Player is dead");
 

@@ -1,4 +1,4 @@
-namespace Scripts
+namespace Scripts.GameMenu
 {
     public enum EGameMenuState
     {

@@ -7,7 +7,6 @@ namespace Scripts
 {
     public class FirebaseInitializer : MonoBehaviour
     {
-
         [Inject]
         private void Init(FirebaseAuthenticationProvider firebaseAuthenticationProvider)
         {
@@ -16,7 +15,6 @@ namespace Scripts
                 var dependencyStatus = task.Result;
                 if (dependencyStatus == DependencyStatus.Available)
                 {
-                    //FirebaseApp.DefaultInstance.Options.DatabaseUrl = new Uri(Constants.DatabaseUrl);
                     firebaseAuthenticationProvider.IsInitialized = true;
                 }
                 else

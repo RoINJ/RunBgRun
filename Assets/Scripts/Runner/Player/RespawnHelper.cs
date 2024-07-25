@@ -4,12 +4,8 @@ namespace Scripts.Runner.Player
 {
     public class RespawnHelper : MonoBehaviour
     {
+        [SerializeField]
         private Animator _animator;
-
-        private void Start()
-        {
-            _animator = GetComponentInChildren<Animator>();
-        }
 
         public void Respawn()
         {

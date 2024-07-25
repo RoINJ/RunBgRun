@@ -10,12 +10,6 @@ namespace Scripts.Runner.Sections.Obstacles
         private int _obstacleType;
         private GameObject _obstacle;
 
-        [Inject]
-        private void Init(ObstaclesPool obstaclesPool)
-        {
-            _obstaclesPool = obstaclesPool;
-        }
-
         public void SpawnObstacles()
         {
             var obstacleType = Random.Range(0, _obstaclesPool.ObstaclesCount);
@@ -35,6 +29,12 @@ namespace Scripts.Runner.Sections.Obstacles
                 _obstacle.transform.SetParent(null);
                 _obstaclesPool.Release(_obstacleType, _obstacle);
             }
+        }
+
+        [Inject]
+        private void Init(ObstaclesPool obstaclesPool)
+        {
+            _obstaclesPool = obstaclesPool;
         }
     }
 }
