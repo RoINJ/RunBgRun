@@ -27,19 +27,6 @@ namespace Scripts.Authentication
         private IAuthenticationProvider _authProvider;
         private AuthUIManager _authUIManager;
 
-        [Inject]
-        private void Init(IAuthenticationProvider authProvider, AuthUIManager authUIManager)
-        {
-            _authProvider = authProvider;
-            _authUIManager = authUIManager;
-        }
-
-        private void Start()
-        {
-            _passwordField.inputType = TMP_InputField.InputType.Password;
-            _confirmPasswordField.inputType = TMP_InputField.InputType.Password;
-        }
-
         public void SignUp()
         {
             if (ValidateFields())
@@ -52,6 +39,19 @@ namespace Scripts.Authentication
                     _authProvider.SignUp(
                         email, password, username, OnSuccess, SetError));
             }
+        }
+
+        [Inject]
+        private void Init(IAuthenticationProvider authProvider, AuthUIManager authUIManager)
+        {
+            _authProvider = authProvider;
+            _authUIManager = authUIManager;
+        }
+
+        private void Start()
+        {
+            _passwordField.inputType = TMP_InputField.InputType.Password;
+            _confirmPasswordField.inputType = TMP_InputField.InputType.Password;
         }
 
         private bool ValidateFields()

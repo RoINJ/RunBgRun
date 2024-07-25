@@ -6,6 +6,9 @@ namespace Scripts.Runner.Sections
 {
     public class SectionRemoval : MonoBehaviour
     {
+        [SerializeField]
+        private ObstaclesSpawner _obstaclesSpawner;
+
         private SectionPool _sectionPool;
 
         [Inject]
@@ -24,7 +27,7 @@ namespace Scripts.Runner.Sections
 
         private void DestroySection()
         {
-            gameObject.GetComponentInParent<ObstaclesSpawner>().ReleaseObstacles();
+            _obstaclesSpawner.ReleaseObstacles();
             _sectionPool.Release(transform.parent.gameObject);
         }
     }

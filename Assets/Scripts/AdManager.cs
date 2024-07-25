@@ -1,14 +1,34 @@
 using System;
 using GoogleMobileAds.Api;
 using UnityEngine;
+using Zenject;
 
 namespace Scripts
 {
     public class AdManager : MonoBehaviour
     {
+        private GameConfiguration _gameConfiguration;
         private RewardedAd _rewardedAd;
 
-        public void Start()
+        public void ShowRewardedAd(Action callback)
+        {
+            if (_rewardedAd is not null && _rewardedAd.CanShowAd())
+            {
+                _rewardedAd.Show(_ =>
+                {
+                    callback?.Invoke();
+                    LoadRewardedAd();
+                });
+            }
+        }
+
+        [Inject]
+        private void Init(GameConfiguration gameConfiguration)
+        {
+            _gameConfiguration = gameConfiguration;
+        }
+
+        private void Start()
         {
             MobileAds.Initialize(_ => LoadRewardedAd());
         }
@@ -23,7 +43,7 @@ namespace Scripts
 
             Debug.Log("Loading the rewarded ad.");
 
-            RewardedAd.Load(Constants.AdUnitId, new AdRequest(),
+            RewardedAd.Load(_gameConfiguration.AdUnitAndroidId, new AdRequest(),
                 (ad, error) =>
                 {
                     if (error is null && ad is not null)
@@ -39,18 +59,6 @@ namespace Scripts
                                        "with error : " + error);
                     }
                 });
-        }
-
-        public void ShowRewardedAd(Action callback)
-        {
-            if (_rewardedAd is not null && _rewardedAd.CanShowAd())
-            {
-                _rewardedAd.Show(_ =>
-                {
-                    callback?.Invoke();
-                    LoadRewardedAd();
-                });
-            }
         }
     }
 }

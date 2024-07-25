@@ -4,17 +4,16 @@ namespace Scripts.Runner.Player
 {
     public class RespawnHelper : MonoBehaviour
     {
-        private Animator _animator;
+        private PlayerMovement _playerMovement;
 
         private void Start()
         {
-            _animator = GetComponentInChildren<Animator>();
+            _playerMovement = GetComponent<PlayerMovement>();
         }
 
         public void Respawn()
         {
-            transform.rotation = Quaternion.Euler(0, transform.rotation.y, transform.rotation.z);
-            _animator.SetTrigger(Constants.Triggers.RunTrigger);
+            _playerMovement.Respawn();
         }
     }
 }

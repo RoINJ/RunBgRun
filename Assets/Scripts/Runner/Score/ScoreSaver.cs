@@ -9,6 +9,15 @@ namespace Scripts.Runner.Score
         private ScoreManager _scoreManager;
         private IAuthenticationProvider _authenticationProvider;
         private IScoreStorage _scoreProvider;
+        
+        public void SaveScore()
+        {
+            _scoreProvider.SaveScore(new ScoreEntity
+            {
+                Score = _scoreManager.Score,
+                Username = _authenticationProvider.CurrentUser.Username,
+            });
+        }
 
         [Inject]
         private void Init(
@@ -18,15 +27,6 @@ namespace Scripts.Runner.Score
             _scoreManager = GetComponent<ScoreManager>();
             _authenticationProvider = authenticationProvider;
             _scoreProvider = scoreProvider;
-        }
-
-        public void SaveScore()
-        {
-            _scoreProvider.SaveScore(new ScoreEntity
-            {
-                Score = _scoreManager.Score,
-                Username = _authenticationProvider.CurrentUser.Username,
-            });
         }
     }
 }

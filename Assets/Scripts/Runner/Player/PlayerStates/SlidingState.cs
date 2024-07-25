@@ -1,8 +1,10 @@
+using UnityEngine;
+
 namespace Scripts.Runner.Player.PlayerStates
 {
     public class SlidingState : PlayerState
     {
-        public SlidingState(PlayerMovement playerMovement) : base(playerMovement)
+        public SlidingState(PlayerMovement playerMovement, Animator animator) : base(playerMovement, animator)
         {
         }
 

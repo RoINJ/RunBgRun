@@ -2,6 +2,7 @@ using Scripts.Authentication;
 using Scripts.Runner.Sections.Obstacles;
 using Scripts.Runner.Sections;
 using Zenject;
+using Scripts.GameMenu;
 
 namespace Scripts.Installers
 {

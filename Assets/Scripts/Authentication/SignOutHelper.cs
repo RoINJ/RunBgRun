@@ -1,3 +1,4 @@
+using Scripts.GameMenu;
 using UnityEngine;
 using Zenject;
 
@@ -9,6 +10,13 @@ namespace Scripts.Authentication
         private AuthUIManager _authUIManager;
         private GameMenuUIManager _gameMenuUIManager;
 
+        public void SignOut()
+        {
+            _authProvider.SignOut();
+            _gameMenuUIManager.SetActivePanel(EGameMenuState.None);
+            _authUIManager.ShowSignInPanel();
+        }
+
         [Inject]
         private void Init(
             IAuthenticationProvider authProvider,
@@ -18,13 +26,6 @@ namespace Scripts.Authentication
             _authProvider = authProvider;
             _authUIManager = authUIManager;
             _gameMenuUIManager = gameMenuUIManager;
-        }
-
-        public void SignOut()
-        {
-            _authProvider.SignOut();
-            _gameMenuUIManager.SetActivePanel(EGameMenuState.None);
-            _authUIManager.ShowSignInPanel();
         }
     }
 }

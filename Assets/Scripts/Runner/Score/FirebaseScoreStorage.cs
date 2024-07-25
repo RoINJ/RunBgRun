@@ -12,11 +12,13 @@ namespace Scripts.Runner.Score
     public class FirebaseScoreStorage : IScoreStorage
     {
         private DatabaseReference _databaseReference;
+        private GameConfiguration _gameConfiguration;
 
         [Inject]
-        private void Init(DatabaseReference databaseReference)
+        private void Init(DatabaseReference databaseReference, GameConfiguration gameConfiguration)
         {
             _databaseReference = databaseReference;
+            _gameConfiguration = gameConfiguration;
         }
 
         public void SaveScore(ScoreEntity score)
@@ -31,7 +33,7 @@ namespace Scripts.Runner.Score
             _databaseReference
                 .Child("scores")
                 .OrderByChild(nameof(ScoreEntity.Score))
-                .LimitToLast(Constants.ScoreboardLength)
+                .LimitToLast(_gameConfiguration.ScoreboardLength)
                 .GetValueAsync()
                 .ContinueWithOnMainThread(task =>
                 {

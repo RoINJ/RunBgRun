@@ -1,8 +1,10 @@
+using UnityEngine;
+
 namespace Scripts.Runner.Player.PlayerStates
 {
     public class JumpingState : PlayerState
     {
-        public JumpingState(PlayerMovement playerMovement) : base(playerMovement) { }
+        public JumpingState(PlayerMovement playerMovement, Animator animator) : base(playerMovement, animator) { }
 
         public override void Enter()
         {

@@ -7,10 +7,10 @@ namespace Scripts.Runner.Player.PlayerStates
         protected PlayerMovement PlayerMovement { get; }
         protected Animator Animator { get; }
 
-        protected PlayerState(PlayerMovement playerMovement)
+        protected PlayerState(PlayerMovement playerMovement, Animator animator)
         {
             PlayerMovement = playerMovement;
-            Animator = playerMovement.GetComponentInChildren<Animator>();
+            Animator = animator;
         }
 
         public virtual void Enter() { }
