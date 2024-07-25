@@ -1,4 +1,3 @@
-using System;
 using Firebase;
 using Scripts.Authentication;
 using UnityEngine;

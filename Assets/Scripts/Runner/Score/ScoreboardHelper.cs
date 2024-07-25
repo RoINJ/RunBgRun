@@ -1,10 +1,8 @@
 using System.Collections.Generic;
-using System.Linq;
-using Scripts.Runner.Score;
 using UnityEngine;
 using Zenject;
 
-namespace Scripts
+namespace Scripts.Runner.Score
 {
     public class ScoreboardHelper : MonoBehaviour
     {

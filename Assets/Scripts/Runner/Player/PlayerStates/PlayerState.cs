@@ -7,7 +7,7 @@ namespace Scripts.Runner.Player.PlayerStates
         protected PlayerMovement PlayerMovement { get; }
         protected Animator Animator { get; }
 
-        public PlayerState(PlayerMovement playerMovement)
+        protected PlayerState(PlayerMovement playerMovement)
         {
             PlayerMovement = playerMovement;
             Animator = playerMovement.GetComponentInChildren<Animator>();
