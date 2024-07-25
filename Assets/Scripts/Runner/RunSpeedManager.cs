@@ -1,14 +1,23 @@
 using UnityEngine;
+using Zenject;
 
 namespace Scripts.Runner
 {
     public class RunSpeedManager : MonoBehaviour
     {
+        private GameConfiguration _gameConfiguration;
+
         public float Speed { get; private set; }
 
         public void ResetSpeed()
         {
-            Speed = Constants.StartMovementSpeed;
+            Speed = _gameConfiguration.StartMovementSpeed;
+        }
+
+        [Inject]
+        private void Init(GameConfiguration gameConfiguration)
+        {
+            _gameConfiguration = gameConfiguration;
         }
 
         private void Start()
@@ -18,7 +27,7 @@ namespace Scripts.Runner
 
         private void FixedUpdate()
         {
-            Speed += Constants.SpeedIncreasingAcceleration;
+            Speed += _gameConfiguration.SpeedIncreasingAcceleration;
         }
     }
 }

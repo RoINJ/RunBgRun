@@ -6,13 +6,15 @@ namespace Scripts.Runner.Sections
     public class SectionGeneration : MonoBehaviour
     {
         private SectionPool _sectionPool;
+        private GameConfiguration _gameConfiguration;
 
         private bool _wasRespawned;
 
         [Inject]
-        private void Init(SectionPool sectionPool)
+        private void Init(SectionPool sectionPool, GameConfiguration gameConfiguration)
         {
             _sectionPool = sectionPool;
+            _gameConfiguration = gameConfiguration;
         }
 
         private void OnDisable()
@@ -36,7 +38,7 @@ namespace Scripts.Runner.Sections
 
                 var section = _sectionPool.Get();
                 var spawnPosition = transform.parent.position +
-                    Vector3.forward * Constants.SectionLength * Constants.ActiveSectionsCount;
+                    Vector3.forward * _gameConfiguration.SectionLength * _gameConfiguration.ActiveSectionsCount;
 
                 section.GetComponent<SectionInitializer>().Initialize(spawnPosition);
             }
