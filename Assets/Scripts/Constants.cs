@@ -10,6 +10,7 @@ namespace Scripts
             public const string JumpTrigger = "JumpTrigger";
             public const string SlideTrigger = "SlideTrigger";
             public const string DeathTrigger = "DeathTrigger";
+            public const string RespawnTrigger = "RespawnTrigger";
         }
     }
 }

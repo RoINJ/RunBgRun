@@ -48,6 +48,10 @@ namespace Scripts.Runner.Player
 
         public void EndJump() => Run();
 
+        public void Die(Vector3 fallDirection) => SetState(new DeadState(this, _animator, fallDirection));
+
+        public void Respawn() => Run();
+
         private void Run() => SetState(new RunningState(this, _animator, _inputHandler));
 
         private void Awake()

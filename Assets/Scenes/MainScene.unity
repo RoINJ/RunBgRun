@@ -3452,7 +3452,7 @@ MonoBehaviour:
   _defaultCollider: {fileID: 1500491385}
   _jumpCollider: {fileID: 1500491383}
   _slideCollider: {fileID: 1500491384}
-  _animator: {fileID: 0}
+  _animator: {fileID: 1168453496}
 --- !u!114 &1500491391
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3524,11 +3524,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 538afe40bf58b484f89ce3c5858436c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _panels: []
-  _mainMenuPanel: {fileID: 570502669}
-  _scoreboardPanel: {fileID: 2021612671}
-  _deathMenuPanel: {fileID: 1085137035}
-  _inGamePanel: {fileID: 984593263}
+  _panels:
+  - {fileID: 570502675}
+  - {fileID: 2021612676}
+  - {fileID: 1085137039}
+  - {fileID: 984593267}
   _startGameLabel: {fileID: 1894802614}
 --- !u!114 &1644294754 stripped
 MonoBehaviour:
